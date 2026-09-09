@@ -7,7 +7,7 @@ import { useState } from "react";
 
 export default function NothingHere(){
 
-  const [isOpenHamburger, setIsOpenHamburger] = useState(false);
+  const [isOpenHamburger, setIsOpenHamburger] = useState(true);
 
   return(
     <>

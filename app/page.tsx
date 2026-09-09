@@ -9,7 +9,7 @@ import { useState } from "react";
 
 export default function Todo(){
 
-  const [isOpenHamburger, setIsOpenHamburger] = useState(false);
+  const [isOpenHamburger, setIsOpenHamburger] = useState(true);
 
   return(
     <>
