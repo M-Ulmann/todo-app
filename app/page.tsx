@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Bin from "@/public/bin.png"
 import Edit from "@/public/edit.png"
+import Hamburger from "@/public/hamburger.png"
 import Image from "next/image";
 
 export default function Todo(){
@@ -24,15 +25,25 @@ export default function Todo(){
           </Link>
         </div>
 
-        <button
-          className="px-2 py-2 cursor-pointer bg-amber-950 md:px-5"
-        >
-          dark mode
-        </button>
+        <div className="flex flex-row gap-15 bg-amber-800">
+          <p>Light mode</p>
+          <button className=" translate-x-10 hover:-translate-x-10 transition ease">
+            .
+          </button>
+          <p>Dark mode</p>
+        </div>
 
       </header>
 
-      <main className="bg-black min-h-dvh flex flex-col items-center justify-center">
+      <main className="bg-black min-h-dvh flex flex-col items-center justify-center relative">
+
+        <button className="bg-white absolute text-7xl self-end justify-self-end top-5 right-5 cursor-pointer transition duration-250 ease-out rounded-md hover:rotate-90 active:opacity-50">
+          <Image 
+            src={Hamburger}
+            height={60}
+            alt="hamburger"
+          />
+        </button>
 
         <section className="bg-white p-10 flex flex-col gap-10 rounded-2xl w-11/12 shadow-white shadow-lg xl:min-w-3/5 sm:min-w-3/4 sm:w-0">
           <p className="text-center px-10 py-3 bg-green-200 text-green-500 rounded-4xl text-xl">
@@ -45,7 +56,7 @@ export default function Todo(){
 
           <div className=" flex flex-col gap-5 justify-center text-2xl sm:flex-row sm:gap-0">
             <input
-              className="flex flex-1 text-2xl pl-5 py-2 rounded-2xl  sm:rounded-l-2xl sm:rounded-r-none"
+              className="flex flex-1 text-2xl pl-5 py-2 rounded-2xl  sm:rounded-l-2xl sm:rounded-r-none focus:outline-cyan-500 focus:outline-2 focus:placeholder:none"
               placeholder="eg. tool" 
               type="text"
               maxLength={40}
