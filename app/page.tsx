@@ -1,53 +1,18 @@
-import Link from "next/link";
 import Bin from "@/public/bin.png"
 import Edit from "@/public/edit.png"
-import Hamburger from "@/public/hamburger.png"
 import Image from "next/image";
+import { Header } from "@/components/header";
+import { Hamburger } from "@/components/hamburger";
 
 export default function Todo(){
   return(
     <>
-      <header className="bg-cyan-500 rounded-b-2xl flex flex-row items-center px-5 py-5 gap-7 text-lg justify-between tracking-wider md:text-2xl md:px-15">
 
-        <div className="flex flex-row gap-7">
-          <Link
-            className=" hover:text-blue-800 active:text-black transition duration-200"
-            href={'/'}
-          >
-            ToDo      
-          </Link>
-
-          <Link 
-            className="hover:text-blue-800 active:text-black transition duration-200"
-            href={'/nothing-here'}
-          >
-            NothingHere
-          </Link>
-        </div>
-
-        <div className="flex flex-row gap-13 items-center">
-          <button className="cursor-pointer">
-            Light mode
-          </button>
-          <div className="bg-black w-5 h-5 rounded-4xl translate-x-10 hover:-translate-x-10 transition ease-out duration-300">
-
-          </div>
-          <button className="cursor-pointer">
-            Dark mode
-          </button>
-        </div>
-
-      </header>
+      <Header />
 
       <main className="bg-black min-h-dvh flex flex-col items-center justify-center relative">
 
-        <button className="bg-white absolute text-7xl self-end justify-self-end top-5 right-5 cursor-pointer transition duration-250 ease-out rounded-md hover:rotate-90 active:opacity-50">
-          <Image 
-            src={Hamburger}
-            height={60}
-            alt="hamburger"
-          />
-        </button>
+        <Hamburger />
 
         <section className="bg-white p-10 flex flex-col gap-10 rounded-2xl w-11/12 shadow-white shadow-lg xl:min-w-3/5 sm:min-w-3/4 sm:w-0">
           <p className="text-center px-10 py-3 bg-green-200 text-green-500 rounded-4xl text-xl">
