@@ -1,15 +1,21 @@
+'use client'
+
 import { Hamburger } from "@/components/hamburger";
 import { Header } from "@/components/header";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function NothingHere(){
+
+  const [isOpenHamburger, setIsOpenHamburger] = useState(false);
+
   return(
     <>
-      <Header />
+      <Header isOpenHamburger={isOpenHamburger} />
 
       <main className=" min-h-dvh bg-black text-white relative flex flex-col items-center justify-center text-2xl gap-10 font-bold">
 
-        <Hamburger />
+        <Hamburger setIsOpenHamburger={setIsOpenHamburger} isOpenHamburger={isOpenHamburger}/>
 
         <p className="text-4xl">Here is nothing... maybe</p>
         <p>

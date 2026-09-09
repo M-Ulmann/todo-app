@@ -1,8 +1,9 @@
 import Link from "next/link";
+import clsx from "clsx";
 
-export function Header(){
+export function Header({isOpenHamburger}: {isOpenHamburger: boolean}){
   return(
-    <header className="bg-cyan-500 rounded-b-2xl flex flex-row items-center px-5 py-5 gap-7 text-lg justify-between tracking-wider md:text-2xl md:px-15">
+    <header className={clsx("bg-cyan-500 rounded-b-2xl flex flex-row items-center px-5 py-5 gap-7 text-lg justify-between tracking-wider md:text-2xl md:px-15", isOpenHamburger && " hidden")}>
 
       <div className="flex flex-row gap-7">
         <Link

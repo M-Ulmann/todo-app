@@ -1,18 +1,24 @@
+'use client'
+
 import Bin from "@/public/bin.png"
 import Edit from "@/public/edit.png"
 import Image from "next/image";
 import { Header } from "@/components/header";
 import { Hamburger } from "@/components/hamburger";
+import { useState } from "react";
 
 export default function Todo(){
+
+  const [isOpenHamburger, setIsOpenHamburger] = useState(false);
+
   return(
     <>
 
-      <Header />
+      <Header isOpenHamburger={isOpenHamburger} />
 
       <main className="bg-black min-h-dvh flex flex-col items-center justify-center relative">
 
-        <Hamburger />
+        <Hamburger setIsOpenHamburger={setIsOpenHamburger} isOpenHamburger={isOpenHamburger} />
 
         <section className="bg-white p-10 flex flex-col gap-10 rounded-2xl w-11/12 shadow-white shadow-lg xl:min-w-3/5 sm:min-w-3/4 sm:w-0">
           <p className="text-center px-10 py-3 bg-green-200 text-green-500 rounded-4xl text-xl">
