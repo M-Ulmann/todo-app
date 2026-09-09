@@ -25,12 +25,16 @@ export default function Todo(){
           </Link>
         </div>
 
-        <div className="flex flex-row gap-15 bg-amber-800">
-          <p>Light mode</p>
-          <button className=" translate-x-10 hover:-translate-x-10 transition ease">
-            .
+        <div className="flex flex-row gap-13 items-center">
+          <button className="cursor-pointer">
+            Light mode
           </button>
-          <p>Dark mode</p>
+          <div className="bg-black w-5 h-5 rounded-4xl translate-x-10 hover:-translate-x-10 transition ease-out duration-300">
+
+          </div>
+          <button className="cursor-pointer">
+            Dark mode
+          </button>
         </div>
 
       </header>
