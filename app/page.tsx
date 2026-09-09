@@ -6,17 +6,19 @@ import Image from "next/image";
 import { Header } from "@/components/header";
 import { Hamburger } from "@/components/hamburger";
 import { useState } from "react";
+import clsx from "clsx";
 
 export default function Todo(){
 
   const [isOpenHamburger, setIsOpenHamburger] = useState(true);
+  const [isDark, setIsDark] = useState(true);
 
   return(
     <>
 
-      <Header isOpenHamburger={isOpenHamburger} />
+      <Header isOpenHamburger={isOpenHamburger} setIsDark={setIsDark} isDark={isDark}/>
 
-      <main className="bg-black min-h-dvh flex flex-col items-center justify-center relative">
+      <main className={clsx("bg-black min-h-dvh flex flex-col items-center justify-center relative transition ease-out duration-300", !isDark && "bg-white")}>
 
         <Hamburger setIsOpenHamburger={setIsOpenHamburger} isOpenHamburger={isOpenHamburger} />
 
