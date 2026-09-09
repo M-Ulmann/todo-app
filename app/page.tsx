@@ -1,4 +1,7 @@
 import Link from "next/link";
+import Bin from "@/public/bin.png"
+import Edit from "@/public/edit.png"
+import Image from "next/image";
 
 export default function Todo(){
   return(
@@ -22,16 +25,16 @@ export default function Todo(){
         </div>
 
         <button
-          className="px-5 py-2"
+          className="px-2 py-2 cursor-pointer bg-amber-950 md:px-5"
         >
-          Dark mode
+          dark mode
         </button>
 
       </header>
 
       <main className="bg-black min-h-dvh flex flex-col items-center justify-center">
 
-        <section className="bg-white p-10 flex flex-col gap-10 rounded-2xl shadow-white shadow-lg  md:min-w-1/2 sm:max-w-100">
+        <section className="bg-white p-10 flex flex-col gap-10 rounded-2xl w-11/12 shadow-white shadow-lg xl:min-w-3/5 sm:min-w-3/4 sm:w-0">
           <p className="text-center px-10 py-3 bg-green-200 text-green-500 rounded-4xl text-xl">
             Item Added To The List
           </p>
@@ -40,14 +43,15 @@ export default function Todo(){
             ToDo List
           </h1>
 
-          <div className=" flex flex-row justify-center text-2xl">
+          <div className=" flex flex-col gap-5 justify-center text-2xl sm:flex-row sm:gap-0">
             <input
-              className="flex flex-1 text-2xl pl-5 py-2 rounded-l-2xl"
+              className="flex flex-1 text-2xl pl-5 py-2 rounded-2xl  sm:rounded-l-2xl sm:rounded-r-none"
               placeholder="eg. tool" 
-              type="text" 
+              type="text"
+              maxLength={40}
             />
 
-            <button className=" cursor-pointer bg-fuchsia-900 text-white px-5 rounded-r-2xl border-2 border-fuchsia-900 hover:bg-white hover:text-fuchsia-900 active:bg-fuchsia-900 active:text-white transition ease duration-250"
+            <button className=" cursor-pointer bg-fuchsia-900 text-white px-5 border-2 rounded-2xl border-fuchsia-900 hover:bg-white hover:text-fuchsia-900 active:bg-fuchsia-900 active:text-white transition ease duration-250 sm:rounded-r-2xl sm:rounded-l-none sm:justify-self-center"
             >
               Submit
             </button>
@@ -55,105 +59,34 @@ export default function Todo(){
 
           <div className="flex flex-col gap-6 px-5 text-2xl max-h-50 overflow-x-hidden overflow-y-auto overflow-scroll">
 
-            <div className="flex flex-row gap-5">
+            <div className="flex flex-row gap-5 items-center">
 
               <p className="flex-1">
-                vejce mam rad
+                vejce dhbkh jkhkjsdh bhdkjha
               </p>
 
               <button
-                className="cursor-pointer"
+                className="cursor-pointer p-1 rounded-md  hover:bg-gray-200 hover:outline-2 hover:outline-blue-500 active:opacity-70"
               >
-                update
+                <Image 
+                  src={Edit}
+                  width={40}
+                  alt="Edit image"
+                />
               </button>
 
               <button
-                className="cursor-pointer"
+                className="cursor-pointer p-1 rounded-md hover:bg-gray-200 hover:outline-2 hover:outline-red-500 active:opacity-70"
               >
-                remove
+                <Image 
+                  src={Bin}
+                  width={40}
+                  alt="picture" 
+                />
               </button>
 
             </div>
 
-            <div className="flex flex-row gap-5">
-
-              <p className="flex-1">
-                vejce mam rad
-              </p>
-
-              <button
-                className="cursor-pointer"
-              >
-                update
-              </button>
-
-              <button
-                className="cursor-pointer"
-              >
-                remove
-              </button>
-
-            </div>
-
-            <div className="flex flex-row gap-5">
-
-              <p className="flex-1">
-                vejce mam rad
-              </p>
-
-              <button
-                className="cursor-pointer"
-              >
-                update
-              </button>
-
-              <button
-                className="cursor-pointer"
-              >
-                remove
-              </button>
-
-            </div>
-
-            <div className="flex flex-row gap-5">
-
-              <p className="flex-1">
-                vejce mam rad
-              </p>
-
-              <button
-                className="cursor-pointer"
-              >
-                update
-              </button>
-
-              <button
-                className="cursor-pointer"
-              >
-                remove
-              </button>
-
-            </div>
-
-            <div className="flex flex-row gap-5">
-
-              <p className="flex-1">
-                vejce mam rad
-              </p>
-
-              <button
-                className="cursor-pointer"
-              >
-                update
-              </button>
-
-              <button
-                className="cursor-pointer"
-              >
-                remove
-              </button>
-
-            </div>
           </div>
 
           <button
