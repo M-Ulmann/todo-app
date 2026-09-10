@@ -5,7 +5,7 @@ import Edit from "@/public/edit.png"
 import Image from "next/image";
 import { Header } from "@/components/header";
 import { Hamburger } from "@/components/hamburger";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import clsx from "clsx";
 
 //import { Items } from "@/components/items";
@@ -16,6 +16,9 @@ export default function Todo(){
   const [isDark, setIsDark] = useState(true);
   const [itemName, setItemName] = useState("");
   const [todo, setTodo] = useState<string[]>([]);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingIndex, setEditingIndex] = useState(Number);
+  const focusInput = useRef<HTMLInputElement>(null);
 
   return(
     <>
@@ -37,28 +40,38 @@ export default function Todo(){
 
           <div className=" flex flex-col gap-5 justify-center text-2xl sm:flex-row sm:gap-0">
             <input
-              className="flex flex-1 text-2xl pl-5 py-2 rounded-2xl  sm:rounded-l-2xl sm:rounded-r-none focus:outline-cyan-500 focus:outline-2 focus:placeholder:text-transparent"
-              placeholder="eg. tool" 
+              className={"flex flex-1 text-2xl pl-5 py-2 rounded-2xl sm:rounded-l-2xl sm:rounded-r-none focus:outline-cyan-500 focus:outline-2 focus:placeholder:text-transparent"}
+              placeholder="eg. tool"
               type="text"
+              ref={focusInput}
               maxLength={40}
               onChange={(event) => {
                 setItemName(event.target.value);
               }}
               value={itemName}
               onKeyDown={(stisk) =>{
-                if (stisk.key === 'Enter' && itemName.length > 1){
-                  setTodo([...todo, itemName]);
+                if(isEditing && stisk.key === 'Enter' && itemName.length > 1){
+                  setTodo(editItem => editItem.map((item, index) => index === editingIndex ? itemName : item));
+                  setIsEditing(false);
                   setItemName('');
                 }
-                else if (itemName.length < 1){
-                  console.log("vyber delsi jmeno");
+
+                else if (stisk.key === 'Enter' && itemName.length > 1){
+                  setTodo([...todo, itemName]);
+                  setItemName('');
                 }
               }}
             />
 
             <button className=" cursor-pointer bg-fuchsia-900 text-white px-5 border-2 rounded-2xl border-fuchsia-900 hover:bg-white hover:text-fuchsia-900 active:bg-fuchsia-900 active:text-white transition ease duration-250 sm:rounded-r-2xl sm:rounded-l-none sm:justify-self-center"
               onClick={() => {
-                if(itemName.length > 1){
+                if(isEditing && itemName.length > 1){
+                  setTodo(editItem => editItem.map((item, index) => index === editingIndex ? itemName : item));
+                  setIsEditing(false);
+                  setItemName('');
+                }
+
+                else if(itemName.length > 1){
                   setTodo([...todo, itemName]);
                   setItemName('');
                 }
@@ -79,6 +92,12 @@ export default function Todo(){
           
                 <button
                   className="cursor-pointer p-1 rounded-md  hover:bg-gray-200 hover:outline-2 hover:outline-blue-500 active:opacity-70"
+                  onClick={() => {
+                    setItemName(item);
+                    setIsEditing(true);
+                    setEditingIndex(index);
+                    focusInput.current?.focus();
+                  }}
                 >
                   <Image 
                     src={Edit}
@@ -90,7 +109,9 @@ export default function Todo(){
                 <button
                   className="cursor-pointer p-1 rounded-md hover:bg-gray-200 hover:outline-2 hover:outline-red-500 active:opacity-70"
                   onClick={() => {
-                    setTodo(deleteItem => deleteItem.filter((_, safeItems) => safeItems !== index))
+                    setTodo(deleteItem => deleteItem.filter((_, safeItems) => safeItems !== index));
+                    setIsEditing(false);
+                    setItemName('');
                   }}
                 >
                   <Image 
@@ -109,6 +130,8 @@ export default function Todo(){
             className="cursor-pointer text-red-600 text-3xl self-center px-8 py-3 rounded-4xl hover:bg-red-500 hover:text-white active:bg-red-800 transition ease duration-250"
             onClick={() => {
               setTodo([]);
+              setIsEditing(false);
+              setItemName('');
             }}
           >
             Clear Items
