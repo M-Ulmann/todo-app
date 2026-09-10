@@ -18,13 +18,24 @@ export default function Todo(){
   const [todo, setTodo] = useState<string[]>([]);
   const [isEditing, setIsEditing] = useState(false);
   const [editingIndex, setEditingIndex] = useState(Number);
+  const [info, setInfo] = useState('');
+
   const focusInput = useRef<HTMLInputElement>(null);
   const scrollDown = useRef<HTMLInputElement>(null);
-  const [info, setInfo] = useState('');
+  const infoTimer = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     scrollDown.current?.scrollIntoView();
   },[todo]);
+
+  useEffect(() => {
+    
+    const timer = setTimeout(() => {
+      setInfo('');
+    }, 2000)
+
+    return () => clearTimeout(timer);
+  },[todo])
 
   return(
     <>
@@ -41,7 +52,7 @@ export default function Todo(){
             : info === "Item Updated" ? "bg-cyan-300 text-blue-600"
             : info === "Item Removed" || info === "List Cleared" ? "bg-red-400 text-red-900" : "bg-transparent text-transparent"
           )}
-               
+            ref={infoTimer}
           >
             {info}
           </p>
