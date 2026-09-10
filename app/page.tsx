@@ -15,10 +15,11 @@ export default function Todo(){
   const [isOpenHamburger, setIsOpenHamburger] = useState(true);
   const [isDark, setIsDark] = useState(true);
   const [itemName, setItemName] = useState("");
-  const [todo, setTodo] = useState<string[]>([]);
   const [isEditing, setIsEditing] = useState(false);
-  const [editingIndex, setEditingIndex] = useState(Number);
+  const [editingIndex, setEditingIndex] = useState(0);
   const [info, setInfo] = useState('');
+
+  const [todo, setTodo] = useState<string[]>([]);
 
   const focusInput = useRef<HTMLInputElement>(null);
   const scrollDown = useRef<HTMLInputElement>(null);
@@ -35,6 +36,21 @@ export default function Todo(){
 
     return () => clearTimeout(timer);
   },[todo])
+
+  function addItem(){
+    if(isEditing && itemName.length > 1){
+      setTodo(editItem => editItem.map((item, index) => index === editingIndex ? itemName : item));
+      setIsEditing(false);
+      setItemName('');
+      setInfo("Item Updated");
+    }
+
+    else if(itemName.length > 1){
+      setTodo([...todo, itemName]);
+      setItemName('');
+      setInfo("Item Added To The List");
+    }
+  }
 
   return(
     <>
@@ -71,35 +87,15 @@ export default function Todo(){
               }}
               value={itemName}
               onKeyDown={(stisk) =>{
-                if(isEditing && stisk.key === 'Enter' && itemName.length > 1){
-                  setTodo(editItem => editItem.map((item, index) => index === editingIndex ? itemName : item));
-                  setIsEditing(false);
-                  setItemName('');
-                  setInfo("Item Updated");
-                }
-
-                else if (stisk.key === 'Enter' && itemName.length > 1){
-                  setTodo([...todo, itemName]);
-                  setItemName('');
-                  setInfo("Item Added To The List");
+                if(stisk.key === 'Enter'){
+                  addItem();
                 }
               }}
             />
 
             <button className=" cursor-pointer bg-fuchsia-900 text-white px-5 border-2 rounded-2xl border-fuchsia-900 hover:bg-white hover:text-fuchsia-900 active:bg-fuchsia-900 active:text-white transition ease duration-250 sm:rounded-r-2xl sm:rounded-l-none sm:justify-self-center"
               onClick={() => {
-                if(isEditing && itemName.length > 1){
-                  setTodo(editItem => editItem.map((item, index) => index === editingIndex ? itemName : item));
-                  setIsEditing(false);
-                  setItemName('');
-                  setInfo("Item Updated");
-                }
-
-                else if(itemName.length > 1){
-                  setTodo([...todo, itemName]);
-                  setItemName('');
-                  setInfo("Item Added To The List");
-                }
+                addItem();
               }}
             >
               Submit
