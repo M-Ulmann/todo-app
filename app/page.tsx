@@ -5,7 +5,7 @@ import Edit from "@/public/edit.png"
 import Image from "next/image";
 import { Header } from "@/components/header";
 import { Hamburger } from "@/components/hamburger";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 
 //import { Items } from "@/components/items";
@@ -19,6 +19,11 @@ export default function Todo(){
   const [isEditing, setIsEditing] = useState(false);
   const [editingIndex, setEditingIndex] = useState(Number);
   const focusInput = useRef<HTMLInputElement>(null);
+  const scrollDown = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    scrollDown.current?.scrollIntoView();
+  },[todo]);
 
   return(
     <>
@@ -121,6 +126,8 @@ export default function Todo(){
                   />
                 </button>
           
+                <div ref={scrollDown}></div>
+
               </div>
             ))}
 
