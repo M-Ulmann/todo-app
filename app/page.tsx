@@ -20,6 +20,7 @@ export default function Todo(){
   const [editingIndex, setEditingIndex] = useState(Number);
   const focusInput = useRef<HTMLInputElement>(null);
   const scrollDown = useRef<HTMLInputElement>(null);
+  const [info, setInfo] = useState('');
 
   useEffect(() => {
     scrollDown.current?.scrollIntoView();
@@ -35,8 +36,14 @@ export default function Todo(){
         <Hamburger setIsOpenHamburger={setIsOpenHamburger} isOpenHamburger={isOpenHamburger} />
 
         <section className="bg-white p-10 flex flex-col gap-10 rounded-2xl w-11/12 shadow-white shadow-lg xl:min-w-3/5 sm:min-w-3/4 sm:w-0">
-          <p className="text-center px-10 py-3 bg-green-200 text-green-500 rounded-4xl text-xl">
-            Item Added To The List
+          <p className={clsx("text-center h-10 rounded-4xl text-xl flex items-center justify-center",
+            info === "Item Added To The List" ? "bg-green-300 text-green-700" 
+            : info === "Item Updated" ? "bg-cyan-300 text-blue-600"
+            : info === "Item Removed" || info === "List Cleared" ? "bg-red-400 text-red-900" : "bg-transparent text-transparent"
+          )}
+               
+          >
+            {info}
           </p>
 
           <h1 className="text-center text-fuchsia-900 font-bold text-5xl tracking-widest">
@@ -59,11 +66,13 @@ export default function Todo(){
                   setTodo(editItem => editItem.map((item, index) => index === editingIndex ? itemName : item));
                   setIsEditing(false);
                   setItemName('');
+                  setInfo("Item Updated");
                 }
 
                 else if (stisk.key === 'Enter' && itemName.length > 1){
                   setTodo([...todo, itemName]);
                   setItemName('');
+                  setInfo("Item Added To The List");
                 }
               }}
             />
@@ -74,11 +83,13 @@ export default function Todo(){
                   setTodo(editItem => editItem.map((item, index) => index === editingIndex ? itemName : item));
                   setIsEditing(false);
                   setItemName('');
+                  setInfo("Item Updated");
                 }
 
                 else if(itemName.length > 1){
                   setTodo([...todo, itemName]);
                   setItemName('');
+                  setInfo("Item Added To The List");
                 }
               }}
             >
@@ -117,6 +128,7 @@ export default function Todo(){
                     setTodo(deleteItem => deleteItem.filter((_, safeItems) => safeItems !== index));
                     setIsEditing(false);
                     setItemName('');
+                    setInfo("Item Removed");
                   }}
                 >
                   <Image 
@@ -139,6 +151,7 @@ export default function Todo(){
               setTodo([]);
               setIsEditing(false);
               setItemName('');
+              setInfo("List Cleared");
             }}
           >
             Clear Items
