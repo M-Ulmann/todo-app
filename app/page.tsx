@@ -22,7 +22,6 @@ export default function Todo(){
 
   const focusInput = useRef<HTMLInputElement>(null);
   const scrollDown = useRef<HTMLInputElement>(null);
-  const infoTimer = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     scrollDown.current?.scrollIntoView();
@@ -47,12 +46,11 @@ export default function Todo(){
         <Hamburger setIsOpenHamburger={setIsOpenHamburger} isOpenHamburger={isOpenHamburger} />
 
         <section className="bg-white p-10 flex flex-col gap-10 rounded-2xl w-11/12 shadow-white shadow-lg xl:min-w-3/5 sm:min-w-3/4 sm:w-0">
-          <p className={clsx("text-center h-10 rounded-4xl text-xl flex items-center justify-center",
+          <p className={clsx("text-center h-10 rounded-4xl text-xl transition duration-300 flex items-center justify-center",
             info === "Item Added To The List" ? "bg-green-300 text-green-700" 
             : info === "Item Updated" ? "bg-cyan-300 text-blue-600"
             : info === "Item Removed" || info === "List Cleared" ? "bg-red-400 text-red-900" : "bg-transparent text-transparent"
           )}
-            ref={infoTimer}
           >
             {info}
           </p>
