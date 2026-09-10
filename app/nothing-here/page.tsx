@@ -9,7 +9,7 @@ import clsx from "clsx";
 export default function NothingHere(){
 
   const [isOpenHamburger, setIsOpenHamburger] = useState(true);
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(true);
 
   return(
     <>
