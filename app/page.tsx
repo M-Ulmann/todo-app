@@ -18,6 +18,7 @@ export default function Todo(){
   const [isEditing, setIsEditing] = useState(false);
   const [editingIndex, setEditingIndex] = useState(0);
   const [info, setInfo] = useState('');
+  const [loaded, setLoaded] = useState(false);
 
   const [todo, setTodo] = useState<string[]>([]);
 
@@ -35,7 +36,7 @@ export default function Todo(){
     }, 2000)
 
     return () => clearTimeout(timer);
-  },[todo])
+  },[todo]);
 
   function addItem(){
     if(isEditing && itemName.length > 1){
@@ -51,6 +52,25 @@ export default function Todo(){
       setInfo("Item Added To The List");
     }
   }
+
+  useEffect(() => {
+    const savedTodo = localStorage.getItem('todo');
+    if (savedTodo) {
+      try {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setTodo(JSON.parse(savedTodo));
+      } catch (error) {
+        console.error("Failed to parse local storage:", error);
+      }
+    }
+    
+    setLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (!loaded) return;
+    localStorage.setItem('todo', JSON.stringify(todo));
+  }, [todo, loaded]);
 
   return(
     <>
